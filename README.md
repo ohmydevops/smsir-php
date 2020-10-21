@@ -8,7 +8,7 @@ composer require amirbagh75/smsir-php
 ```
 
 ### Example
-```
+```php
 <?php
 
 require_once '../vendor/autoload.php';
@@ -25,7 +25,7 @@ print_r($smsir->smsCredit());
 
 ### Current methods:
 
-```
+```php
 smsCredit(): float
 
 getSMSLines(): array
