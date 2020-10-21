@@ -151,7 +151,8 @@ class SmsIRClient
      * @return mixed
      * @throws GuzzleException
      */
-    public function ultraFastSend(array $parameters, string $templateId, string $mobileNumber) {
+    public function ultraFastSend(array $parameters, string $templateId, string $mobileNumber): array
+    {
         if(count($parameters) == 0){
             die("please fill parameters for ultraFastSend\n");
         }
