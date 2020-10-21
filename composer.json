@@ -1,0 +1,24 @@
+{
+  "name": "amirbagh75/smsir-php",
+  "description": "Unofficial sms.ir PHP Package",
+  "keywords": ["php", "sms", "پیامک", "اس ام اس", "sendsms", "notifacation", "sms.ir"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Amirhossein Baghaie",
+      "email": "amirbagh75@gmail.com",
+      "homepage": "https://amirbagh75.ir",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "~7.4",
+    "ext-json": "*",
+    "guzzlehttp/guzzle": "^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Amirbagh75\\SMSIR\\": "src"
+    }
+  }
+}
