@@ -4,3 +4,4 @@ vendor
 phpcs.xml
 phpunit.xml
 .phpunit.result.cache
+.idea
