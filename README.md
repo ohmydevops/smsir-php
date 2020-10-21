@@ -41,3 +41,4 @@ ultraFastSend(array $parameters, string $templateId, string $mobileNumber): arra
 - [ ] Add exception handling
 - [ ] Add remaining methods
 - [ ] Add Laravel 8.x support
+- [ ] Add Tests
