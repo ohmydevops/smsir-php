@@ -10,11 +10,11 @@ use GuzzleHttp\Exception\GuzzleException;
 
 class SmsIRClient
 {
-    private string $userApiKey;
-    private string $secretKey;
-    private string $token;
-    private string $lineNumber;
-    private Client $client;
+    private $userApiKey;
+    private $secretKey;
+    private $token;
+    private $lineNumber;
+    private $client;
 
     /**
      * Create a new HesabfaClient Instance
@@ -45,7 +45,7 @@ class SmsIRClient
     public function smsCredit(): float
     {
         $result = $this->executeRequest('credit');
-        return (float)json_decode($result->getBody()->getContents(), true)['Credit'];
+        return (float) json_decode($result->getBody()->getContents(), true)['Credit'];
     }
 
     /**
@@ -153,7 +153,7 @@ class SmsIRClient
      */
     public function ultraFastSend(array $parameters, string $templateId, string $mobileNumber): array
     {
-        if(count($parameters) == 0){
+        if (count($parameters) == 0) {
             die("please fill parameters for ultraFastSend\n");
         }
 
@@ -161,14 +161,12 @@ class SmsIRClient
         foreach ($parameters as $key => $value) {
             $params[] = ['Parameter' => $key, 'ParameterValue' => $value];
         }
-        $body   = [
+        $body = [
             'ParameterArray' => $params,
             'TemplateId' => $templateId,
             'Mobile' => $mobileNumber
         ];
         $result = $this->executeRequest('UltraFastSend', $body);
-        return json_decode($result->getBody()->getContents(),true);
+        return json_decode($result->getBody()->getContents(), true);
     }
-
-
 }
