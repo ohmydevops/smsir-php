@@ -1,5 +1,6 @@
 {
   "name": "amirbagh75/smsir-php",
+  "type": "library",
   "description": "Unofficial sms.ir PHP Package",
   "keywords": ["php", "sms", "پیامک", "اس ام اس", "sendsms", "notifacation", "sms.ir"],
   "license": "MIT",
