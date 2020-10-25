@@ -1,6 +1,6 @@
 [![Latest Stable Version](https://poser.pugx.org/amirbagh75/smsir-php/v)](//packagist.org/packages/amirbagh75/smsir-php) [![Total Downloads](https://poser.pugx.org/amirbagh75/smsir-php/downloads)](//packagist.org/packages/amirbagh75/smsir-php) [![Latest Unstable Version](https://poser.pugx.org/amirbagh75/smsir-php/v/unstable)](//packagist.org/packages/amirbagh75/smsir-php) [![License](https://poser.pugx.org/amirbagh75/smsir-php/license)](//packagist.org/packages/amirbagh75/smsir-php)
 ## Unofficial PHP Package for sms.ir
-Inspired by the [official package](https://github.com/TrueMoein/smsir). The official package just working in laravel! This package working in every PHP project.
+Inspired by the [official package](https://github.com/IPeCompany/SmsirLaravel). The official package just working in laravel! This package working in every PHP project.
 
 ### How to install:
 ```
@@ -42,3 +42,4 @@ ultraFastSend(array $parameters, string $templateId, string $mobileNumber): arra
 - [ ] Add remaining methods
 - [ ] Add Laravel 8.x support
 - [ ] Add Tests
+- [ ] Add CI/CD
