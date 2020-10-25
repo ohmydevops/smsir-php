@@ -17,7 +17,7 @@ class SmsIRClient
     private $client;
 
     /**
-     * Create a new HesabfaClient Instance
+     * Create a new SMSIR Instance
      * @param  string  $userApiKey
      * @param  string  $secretKey
      * @param  string  $lineNumber
