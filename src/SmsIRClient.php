@@ -177,16 +177,16 @@ class SmsIRClient
      * @param $pageNumber  = the page number
      * @param $fromDate  = from date (example: 1399/06/01)
      * @param $toDate  = to date (example: 1399/08/25)
-     * @return mixed
+     * @return array
      * @throws GuzzleException
      */
-    public function getSentMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100)
+    public function getSentMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100): array
     {
         if(empty($fromDate)) {
-            return "please fill parameter fromDate\n";
+            die("please fill parameter fromDate\n");
         }
         if(empty($toDate)) {
-            return "please fill parameter toDate\n";
+            die("please fill parameter toDate\n");
         }
         $result = $this->executeRequest("MessageSend?Shamsi_FromDate=$fromDate&Shamsi_ToDate=$toDate&RowsPerPage=$perPage&RequestedPageNumber=$pageNumber");
         return json_decode($result->getBody()->getContents(), true);
@@ -199,20 +199,19 @@ class SmsIRClient
      * @param $pageNumber  = the page number
      * @param $fromDate  = from date (example: 1399/06/01)
      * @param $toDate  = to date (example: 1399/08/25)
-     * @return mixed
+     * @return array
      * @throws GuzzleException
      *
      */
-    public function getReceivedMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100)
+    public function getReceivedMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100): array
     {
         if(empty($fromDate)) {
-            return "please fill parameter fromDate\n";
+            die("please fill parameter fromDate\n");
         }
         if(empty($toDate)) {
-            return "please fill parameter toDate\n";
+            die("please fill parameter toDate\n");
         }
         $result = $this->executeRequest("ReceiveMessage?Shamsi_FromDate=$fromDate&Shamsi_ToDate=$toDate&RowsPerPage=$perPage&RequestedPageNumber=$pageNumber");
         return json_decode($result->getBody()->getContents(), true);
     }
-
 }
