@@ -35,12 +35,16 @@ send(array $messages, array $mobileNumbers, $sendDateTime = null): array
 
 sendVerificationCode(string $code, string $mobileNumber): array
 
-ultraFastSend(array $parameters, string $templateId, string $mobileNumber): array 
+ultraFastSend(array $parameters, string $templateId, string $mobileNumber): array
+
+getSentMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100): array
+
+getReceivedMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100): array
 ```
 ### Roadmap:
 
+- [X] Add remaining methods
 - [ ] Add exception handling
-- [ ] Add remaining methods
 - [ ] Add Laravel 8.x support
+- [ ] Add customer club
 - [ ] Add Tests
-- [ ] Add CI/CD
