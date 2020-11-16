@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Amirbagh75\SMSIR;
 
 use GuzzleHttp\Client;
-use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\GuzzleException;
+use Psr\Http\Message\ResponseInterface;
 
 class SmsIRClient
 {
@@ -17,144 +17,161 @@ class SmsIRClient
     private $client;
 
     /**
-     * Create a new SMSIR Instance
-     * @param  string  $userApiKey
-     * @param  string  $secretKey
-     * @param  string  $lineNumber
-     * @param  int  $timeout
+     * Create a new SMSIR Instance.
+     *
+     * @param string $userApiKey
+     * @param string $secretKey
+     * @param string $lineNumber
+     * @param int    $timeout
      */
     public function __construct(string $userApiKey, string $secretKey, string $lineNumber, int $timeout = 10)
     {
         $this->userApiKey = $userApiKey;
         $this->secretKey = $secretKey;
-        $this->token = "";
+        $this->token = '';
         $this->lineNumber = $lineNumber;
 
         $this->client = new Client([
             'base_uri' => 'http://restfulsms.com/api/',
-            'timeout' => $timeout
+            'timeout'  => $timeout,
         ]);
     }
 
     /**
-     * this method return your credit in sms.ir (sms credit, not money)
+     * this method return your credit in sms.ir (sms credit, not money).
+     *
+     * @throws GuzzleException
      *
      * @return float
-     * @throws GuzzleException
      */
     public function smsCredit(): float
     {
         $result = $this->executeRequest('credit');
+
         return (float) json_decode($result->getBody()->getContents(), true)['Credit'];
     }
 
     /**
-     * @param  string  $route
-     * @param  null  $body
-     * @return ResponseInterface
+     * @param string $route
+     * @param null   $body
+     *
      * @throws GuzzleException
+     *
+     * @return ResponseInterface
      */
     private function executeRequest(string $route, $body = null): ResponseInterface
     {
         if (is_null($body)) {
             return $this->client->get($route, [
                 'headers' => [
-                    'x-sms-ir-secure-token' => $this->getToken()
-                ]
+                    'x-sms-ir-secure-token' => $this->getToken(),
+                ],
             ]);
         }
+
         return $this->client->post($route, [
-            'json' => $body,
+            'json'    => $body,
             'headers' => [
-                'x-sms-ir-secure-token' => $this->getToken()
-            ]
+                'x-sms-ir-secure-token' => $this->getToken(),
+            ],
         ]);
     }
 
     /**
      * this method used in every request to get the token at first.
      *
-     * @return mixed - the Token for use api
-     * @return string
      * @throws GuzzleException
+     *
+     * @return mixed  - the Token for use api
+     * @return string
      */
     private function getToken(): string
     {
         $body = [
             'UserApiKey' => $this->userApiKey,
-            'SecretKey' => $this->secretKey,
+            'SecretKey'  => $this->secretKey,
         ];
         $result = $this->client->post('Token', [
             'json' => $body,
         ]);
+
         return json_decode($result->getBody()->getContents(), true)['TokenKey'];
     }
 
     /**
      * by this method you can fetch all of your sms lines.
      *
-     * @return array
      * @throws GuzzleException
+     *
+     * @return array
      */
     public function getSMSLines(): array
     {
         $result = $this->executeRequest('SMSLine');
+
         return json_decode($result->getBody()->getContents(), true);
     }
 
     /**
-     * Simple send message with sms.ir account and line number
+     * Simple send message with sms.ir account and line number.
      *
-     * @param  array  $messages  = Messages - Count must be equal with $numbers
-     * @param  array  $mobileNumbers
-     * @param  null  $sendDateTime  = don't fill it if you want to send message now
-     * @return array
+     * @param array $messages      = Messages - Count must be equal with $numbers
+     * @param array $mobileNumbers
+     * @param null  $sendDateTime  = don't fill it if you want to send message now
+     *
      * @throws GuzzleException
+     *
+     * @return array
      */
     public function send(array $messages, array $mobileNumbers, $sendDateTime = null): array
     {
         $body = [
-            'Messages' => $messages,
+            'Messages'      => $messages,
             'MobileNumbers' => $mobileNumbers,
-            'LineNumber' => $this->lineNumber
+            'LineNumber'    => $this->lineNumber,
         ];
         if ($sendDateTime !== null) {
             $body['SendDateTime'] = $sendDateTime;
         }
         $result = $this->executeRequest('MessageSend', $body);
+
         return json_decode($result->getBody()->getContents(), true);
     }
 
     /**
      * this method send a verification code to your customer. need active the module at panel first.
      *
-     * @param  string  $code
-     * @param  string  $mobileNumber
-     * @return array
+     * @param string $code
+     * @param string $mobileNumber
+     *
      * @throws GuzzleException
+     *
+     * @return array
      */
     public function sendVerificationCode(string $code, string $mobileNumber): array
     {
         $body = [
-            'Code' => $code,
-            'MobileNumber' => $mobileNumber
+            'Code'         => $code,
+            'MobileNumber' => $mobileNumber,
         ];
         $result = $this->executeRequest('VerificationCode', $body);
+
         return json_decode($result->getBody()->getContents(), true);
     }
 
-
     /**
-     * @param  array  $parameters
-     * @param  string  $templateId
-     * @param  string  $mobileNumber
-     * @return mixed
+     * @param array  $parameters
+     * @param string $templateId
+     * @param string $mobileNumber
+     *
      * @throws GuzzleException
+     *
+     * @return mixed
      */
     public function ultraFastSend(array $parameters, string $templateId, string $mobileNumber): array
     {
         if (count($parameters) == 0) {
-            die("please fill parameters for ultraFastSend\n");
+            exit("please fill parameters for ultraFastSend\n");
         }
 
         $params = [];
@@ -163,55 +180,61 @@ class SmsIRClient
         }
         $body = [
             'ParameterArray' => $params,
-            'TemplateId' => $templateId,
-            'Mobile' => $mobileNumber
+            'TemplateId'     => $templateId,
+            'Mobile'         => $mobileNumber,
         ];
         $result = $this->executeRequest('UltraFastSend', $body);
+
         return json_decode($result->getBody()->getContents(), true);
     }
 
     /**
-     * this method used for fetch your sent messages
+     * this method used for fetch your sent messages.
      *
      * @param $perPage  = how many sms you want to fetch in every page
      * @param $pageNumber  = the page number
      * @param $fromDate  = from date (example: 1399/06/01)
      * @param $toDate  = to date (example: 1399/08/25)
-     * @return array
+     *
      * @throws GuzzleException
+     *
+     * @return array
      */
     public function getSentMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100): array
     {
-        if(empty($fromDate)) {
-            die("please fill parameter fromDate\n");
+        if (empty($fromDate)) {
+            exit("please fill parameter fromDate\n");
         }
-        if(empty($toDate)) {
-            die("please fill parameter toDate\n");
+        if (empty($toDate)) {
+            exit("please fill parameter toDate\n");
         }
         $result = $this->executeRequest("MessageSend?Shamsi_FromDate=$fromDate&Shamsi_ToDate=$toDate&RowsPerPage=$perPage&RequestedPageNumber=$pageNumber");
+
         return json_decode($result->getBody()->getContents(), true);
     }
 
     /**
-     * this method used for fetch received messages
+     * this method used for fetch received messages.
      *
      * @param $perPage  = how many sms you want to fetch in every page
      * @param $pageNumber  = the page number
      * @param $fromDate  = from date (example: 1399/06/01)
      * @param $toDate  = to date (example: 1399/08/25)
-     * @return array
+     *
      * @throws GuzzleException
      *
+     * @return array
      */
     public function getReceivedMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100): array
     {
-        if(empty($fromDate)) {
-            die("please fill parameter fromDate\n");
+        if (empty($fromDate)) {
+            exit("please fill parameter fromDate\n");
         }
-        if(empty($toDate)) {
-            die("please fill parameter toDate\n");
+        if (empty($toDate)) {
+            exit("please fill parameter toDate\n");
         }
         $result = $this->executeRequest("ReceiveMessage?Shamsi_FromDate=$fromDate&Shamsi_ToDate=$toDate&RowsPerPage=$perPage&RequestedPageNumber=$pageNumber");
+
         return json_decode($result->getBody()->getContents(), true);
     }
 }
