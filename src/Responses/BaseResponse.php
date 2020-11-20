@@ -6,12 +6,12 @@ namespace Amirbagh75\SMSIR\Responses;
 
 class BaseResponse
 {
-	/**
-	 * @var bool
-	 */
-	public $isSuccessful;
-	/**
-	 * @var string
-	 */
-	public $message;
+    /**
+     * @var bool
+     */
+    public $isSuccessful;
+    /**
+     * @var string
+     */
+    public $message;
 }

@@ -1,11 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Amirbagh75\SMSIR\Responses;
 
-
-class SMSLine
+class SentMessage
 {
     /**
      * @var int
@@ -15,11 +12,11 @@ class SMSLine
     /**
      * @var string
      */
-    public $lineNumber;
+    public $mobileNumber;
     
-    public function __construct(int $id, string $lineNumber)
+    public function __construct(int $id, string $mobileNumber)
     {
         $this->id = $id;
-        $this->lineNumber = $lineNumber;
+        $this->mobileNumber = $mobileNumber;
     }
 }
