@@ -25,7 +25,7 @@ class SmsIRClient
     private $token;
     private $lineNumber;
     private $client;
-    
+
     /**
      * Create a new SMSIR Instance
      * @param string $userApiKey
@@ -39,13 +39,13 @@ class SmsIRClient
         $this->secretKey = $secretKey;
         $this->token = "";
         $this->lineNumber = $lineNumber;
-        
+
         $this->client = new Client([
             'base_uri' => 'http://restfulsms.com/api/',
             'timeout' => $timeout,
         ]);
     }
-    
+
     /**
      * this method return your credit in sms.ir (sms credit, not money)
      *
@@ -58,7 +58,7 @@ class SmsIRClient
         $json = json_decode($result->getBody()->getContents(), true);
         return new CreditResponse($json['IsSuccessful'], $json['Message'], $json['Credit']);
     }
-    
+
     /**
      * @param string $route
      * @param null $body
@@ -81,7 +81,7 @@ class SmsIRClient
             ],
         ]);
     }
-    
+
     /**
      * this method used in every request to get the token at first.
      *
@@ -100,7 +100,7 @@ class SmsIRClient
         ]);
         return json_decode($result->getBody()->getContents(), true)['TokenKey'];
     }
-    
+
     /**
      * by this method you can fetch all of your sms lines.
      *
@@ -117,7 +117,7 @@ class SmsIRClient
         }
         return new SMSLinesResponse($json['IsSuccessful'], $json['Message'], $lineArray);
     }
-    
+
     /**
      * Simple send message with sms.ir account and line number
      *
@@ -148,7 +148,7 @@ class SmsIRClient
         }
         return new SendResponse($json['IsSuccessful'], $json['Message'], $json['BatchKey'], $sentMessages);
     }
-    
+
     /**
      * this method send a verification code to your customer. need active the module at panel first.
      *
@@ -165,11 +165,14 @@ class SmsIRClient
         ];
         $result = $this->executeRequest('VerificationCode', $body);
         $json = json_decode($result->getBody()->getContents(), true);
-        return new VerificationCodeResponse($json['IsSuccessful'], $json['Message'],
-            (string)$json['VerificationCodeId']);
+        return new VerificationCodeResponse(
+            $json['IsSuccessful'],
+            $json['Message'],
+            (string)$json['VerificationCodeId']
+        );
     }
-    
-    
+
+
     /**
      * @param array $parameters
      * @param string $templateId
@@ -182,7 +185,7 @@ class SmsIRClient
         if (count($parameters) == 0) {
             die("please fill parameters for ultraFastSend\n");
         }
-        
+
         $params = [];
         foreach ($parameters as $key => $value) {
             $params[] = ['Parameter' => $key, 'ParameterValue' => $value];
@@ -194,10 +197,13 @@ class SmsIRClient
         ];
         $result = $this->executeRequest('UltraFastSend', $body);
         $json = json_decode($result->getBody()->getContents(), true);
-        return new VerificationCodeResponse($json['IsSuccessful'], $json['Message'],
-            (string)$json['VerificationCodeId']);
+        return new VerificationCodeResponse(
+            $json['IsSuccessful'],
+            $json['Message'],
+            (string)$json['VerificationCodeId']
+        );
     }
-    
+
     /**
      * this method used for fetch your sent messages
      *
@@ -234,10 +240,14 @@ class SmsIRClient
                 (bool)$message['IsError'],
             );
         }
-        return new SentMessagesResponse((bool)$json['IsSuccessful'], $json['Message'], (int)$json['CountOfAll'],
-            $messages);
+        return new SentMessagesResponse(
+            (bool)$json['IsSuccessful'],
+            $json['Message'],
+            (int)$json['CountOfAll'],
+            $messages
+        );
     }
-    
+
     /**
      * this method used for fetch received messages
      *
@@ -271,7 +281,11 @@ class SmsIRClient
                 (string)$message['ReceiveDateTime']
             );
         }
-        return new ReceivedMessagesResponse((bool)$json['IsSuccessful'], $json['Message'], (int)$json['CountOfAll'],
-            $messages);
+        return new ReceivedMessagesResponse(
+            (bool)$json['IsSuccessful'],
+            $json['Message'],
+            (int)$json['CountOfAll'],
+            $messages
+        );
     }
 }
