@@ -26,25 +26,20 @@ print_r($smsir->smsCredit());
 
 ### Current methods:
 
+All returned models in `src/Responses` directory
+
 ```php
-smsCredit(): float
+smsCredit(): CreditResponse
 
-getSMSLines(): array
+getSMSLines(): SMSLinesResponse
 
-send(array $messages, array $mobileNumbers, $sendDateTime = null): array
+send(array $messages, array $mobileNumbers, $sendDateTime = null): SendResponse
 
-sendVerificationCode(string $code, string $mobileNumber): array
+sendVerificationCode(string $code, string $mobileNumber): VerificationCodeResponse
 
-ultraFastSend(array $parameters, string $templateId, string $mobileNumber): array
+ultraFastSend(array $parameters, string $templateId, string $mobileNumber): VerificationCodeResponse
 
-getSentMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100): array
+getSentMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100): SentMessagesResponse
 
-getReceivedMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100): array
+getReceivedMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100): ReceivedMessagesResponse
 ```
-### Roadmap:
-
-- [X] Add remaining methods
-- [ ] Add exception handling
-- [ ] Add Laravel 8.x support
-- [ ] Add customer club
-- [ ] Add Tests
