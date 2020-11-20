@@ -26,7 +26,7 @@ print_r($smsir->smsCredit());
 
 ### Current methods:
 
-All returned models in `src/Responses` directory
+All returned models are in the `src/Responses` directory
 
 ```php
 smsCredit(): CreditResponse
