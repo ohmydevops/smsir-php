@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Amirbagh75\SMSIR\Responses;
-
 
 class Message
 {
@@ -10,57 +8,57 @@ class Message
      * @var int
      */
     public $id;
-    
+
     /**
      * @var string
      */
     public $lineNumber;
-    
+
     /**
      * @var string
      */
     public $SMSMessageBody;
-    
+
     /**
      * @var string
      */
     public $mobileNumber;
-    
+
     /**
      * @var string
      */
     public $toBeSentAt;
-    
+
     /**
      * @var string
      */
     public $nativeDeliveryStatus;
-    
+
     /**
      * @var string
      */
     public $typeOfMessage;
-    
+
     /**
      * @var string
      */
     public $sendAtLatin;
-    
+
     /**
      * @var string
      */
     public $sendAtJalali;
-    
+
     /**
      * @var bool
      */
     public $isChecked;
-    
+
     /**
      * @var bool
      */
     public $isError;
-    
+
     public function __construct(
         int $id,
         string $lineNumber,

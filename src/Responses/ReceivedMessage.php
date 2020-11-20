@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Amirbagh75\SMSIR\Responses;
-
 
 class ReceivedMessage
 {
@@ -10,38 +8,38 @@ class ReceivedMessage
      * @var int
      */
     public $id;
-    
+
     /**
      * @var string
      */
     public $lineNumber;
-    
+
     /**
      * @var string
      */
     public $SMSMessageBody;
-    
+
     /**
      * @var string
      */
     public $mobileNumber;
-    
-    
+
+
     /**
      * @var string
      */
     public $typeOfMessage;
-    
+
     /**
      * @var string
      */
     public $receiveAtLatin;
-    
+
     /**
      * @var string
      */
     public $receiveAtJalali;
-    
+
     public function __construct(
         int $id,
         string $lineNumber,
