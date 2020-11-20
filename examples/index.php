@@ -1,6 +1,6 @@
 <?php
 
-require_once '../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use Amirbagh75\SMSIR\SmsIRClient;
 
@@ -9,4 +9,6 @@ $secretKey = getenv('SECRET_KEY');
 $lineNumber = getenv('LINE_NUMBER');
 
 $smsir = new SmsIRClient($apiKey, $secretKey, $lineNumber);
-print_r($smsir->smsCredit());
+$res = $smsir->getSMSLines();
+
+print_r($res->isSuccessful);
