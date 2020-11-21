@@ -234,7 +234,7 @@ class SmsIRClient
             $messages
         );
     }
-    
+
     /**
      * this method used for fetch received messages
      *

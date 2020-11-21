@@ -15,4 +15,3 @@ try {
 } catch (\GuzzleHttp\Exception\GuzzleException $e) {
     error_log($e->getMessage(), 0);
 }
-
