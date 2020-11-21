@@ -129,9 +129,6 @@ class SmsIRClient
      */
     public function send(array $messages, array $mobileNumbers, $sendDateTime = null): SendResponse
     {
-        if (count($mobileNumbers) !== count($messages)) {
-            die('mobileNumbers and messages should have equal length');
-        }
         $body = [
             'Messages' => $messages,
             'MobileNumbers' => $mobileNumbers,
@@ -182,10 +179,6 @@ class SmsIRClient
      */
     public function ultraFastSend(array $parameters, string $templateId, string $mobileNumber): VerificationCodeResponse
     {
-        if (count($parameters) == 0) {
-            die("please fill parameters for ultraFastSend\n");
-        }
-
         $params = [];
         foreach ($parameters as $key => $value) {
             $params[] = ['Parameter' => $key, 'ParameterValue' => $value];
@@ -216,12 +209,6 @@ class SmsIRClient
      */
     public function getSentMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100): SentMessagesResponse
     {
-        if (empty($fromDate)) {
-            die("please fill parameter fromDate\n");
-        }
-        if (empty($toDate)) {
-            die("please fill parameter toDate\n");
-        }
         $result = $this->executeRequest("MessageSend?Shamsi_FromDate=$fromDate&Shamsi_ToDate=$toDate&RowsPerPage=$perPage&RequestedPageNumber=$pageNumber");
         $json = json_decode($result->getBody()->getContents(), true);
         $messages = [];
@@ -261,12 +248,6 @@ class SmsIRClient
      */
     public function getReceivedMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100): ReceivedMessagesResponse
     {
-        if (empty($fromDate)) {
-            die("please fill parameter fromDate\n");
-        }
-        if (empty($toDate)) {
-            die("please fill parameter toDate\n");
-        }
         $result = $this->executeRequest("ReceiveMessage?Shamsi_FromDate=$fromDate&Shamsi_ToDate=$toDate&RowsPerPage=$perPage&RequestedPageNumber=$pageNumber");
         $json = json_decode($result->getBody()->getContents(), true);
         $messages = [];
