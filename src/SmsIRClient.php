@@ -200,14 +200,14 @@ class SmsIRClient
     /**
      * this method used for fetch your sent messages
      *
-     * @param $perPage = how many sms you want to fetch in every page
-     * @param $pageNumber = the page number
      * @param $fromDate = from date (example: 1399/06/01)
      * @param $toDate = to date (example: 1399/08/25)
+     * @param int $pageNumber = the page number
+     * @param int $perPage = how many sms you want to fetch in every page
      * @return SentMessagesResponse
      * @throws GuzzleException
      */
-    public function getSentMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100): SentMessagesResponse
+    public function getSentMessages($fromDate, $toDate, int $pageNumber = 1, int $perPage = 100): SentMessagesResponse
     {
         $result = $this->executeRequest("MessageSend?Shamsi_FromDate=$fromDate&Shamsi_ToDate=$toDate&RowsPerPage=$perPage&RequestedPageNumber=$pageNumber");
         $json = json_decode($result->getBody()->getContents(), true);
@@ -234,20 +234,24 @@ class SmsIRClient
             $messages
         );
     }
-
+    
     /**
      * this method used for fetch received messages
      *
-     * @param $perPage = how many sms you want to fetch in every page
-     * @param $pageNumber = the page number
      * @param $fromDate = from date (example: 1399/06/01)
      * @param $toDate = to date (example: 1399/08/25)
+     * @param int $pageNumber = the page number
+     * @param int $perPage = how many sms you want to fetch in every page
      * @return ReceivedMessagesResponse
      * @throws GuzzleException
      *
      */
-    public function getReceivedMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100): ReceivedMessagesResponse
-    {
+    public function getReceivedMessages(
+        $fromDate,
+        $toDate,
+        int $pageNumber = 1,
+        int $perPage = 100
+    ): ReceivedMessagesResponse {
         $result = $this->executeRequest("ReceiveMessage?Shamsi_FromDate=$fromDate&Shamsi_ToDate=$toDate&RowsPerPage=$perPage&RequestedPageNumber=$pageNumber");
         $json = json_decode($result->getBody()->getContents(), true);
         $messages = [];
