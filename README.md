@@ -12,7 +12,7 @@ composer require amirbagh75/smsir-php
 ```php
 <?php
 
-require_once '../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use Amirbagh75\SMSIR\SmsIRClient;
 
@@ -21,7 +21,12 @@ $secretKey = getenv('SECRET_KEY');
 $lineNumber = getenv('LINE_NUMBER');
 
 $smsir = new SmsIRClient($apiKey, $secretKey, $lineNumber);
-print_r($smsir->smsCredit());
+try {
+    $res = $smsir->getSentMessages('1399/06/01', '1399/10/01', 1, 250);
+    print_r($res);
+} catch (\GuzzleHttp\Exception\GuzzleException $e) {
+    error_log($e->getMessage(), 0);
+}
 ```
 
 ### Current methods:
