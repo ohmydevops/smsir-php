@@ -1,4 +1,5 @@
 <?php
+
 return [
     // SMS.ir Api Key
     'api-key' => env('SMSIR_API_KEY', 'Your api key'),
