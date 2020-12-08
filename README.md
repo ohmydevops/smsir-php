@@ -29,6 +29,50 @@ try {
 }
 ```
 
+
+### Example in laravel (use Facades)
+
+First add these environment variables in your .env file:
+
+```
+SMSIR_API_KEY="xxxx"
+SMSIR_SECRET_KEY="xxxx"
+SMSIR_LINE_NUMBER="xxxx"
+```
+Then use it like the following example:
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use SMSIR;
+use Log;
+
+class Example extends Controller
+{
+    /**
+     * Handle the incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function __invoke(Request $request)
+    {
+        // do something ...
+        try {
+            $res = SMSIR::getSentMessages('1399/06/01', '1399/10/01', 1, 250);
+            dd($res);
+        } catch (\GuzzleHttp\Exception\GuzzleException $e) {
+            Log::error($e->getMessage());
+        }
+        // do something ...
+    }
+}
+```
+
+
 ### Current methods:
 
 All returned models are in the `src/Responses` directory
@@ -48,3 +92,12 @@ getSentMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100): SentMessag
 
 getReceivedMessages($fromDate, $toDate, $pageNumber = 1, $perPage = 100): ReceivedMessagesResponse
 ```
+
+## Versioning
+
+We use [Semantic Versioning](http://semver.org/). [See the available versions](https://github.com/amirbagh75/smsir-php/releases).
+
+## Authors
+
+- **[Amirhossein Baghaie](https://github.com/amirbagh75)** - _Maintainer_
+- **[Ariaieboy](https://github.com/ariaieboy)** - _Collaborator_
