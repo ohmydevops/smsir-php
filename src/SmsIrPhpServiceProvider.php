@@ -15,7 +15,7 @@ class SmsIrPhpServiceProvider extends ServiceProvider
             ], 'config');
         }
         $this->app->bind('smsir', function ($app) {
-            return new SmsIRClient(config('smsirphp.api-key'), config('smsirphp.secret-key'), config('smsirphp.line-number'),config('smsirphp.request-timeout'));
+            return new SmsIRClient(config('smsirphp.api-key'), config('smsirphp.secret-key'), config('smsirphp.line-number'), config('smsirphp.request-timeout'));
         });
     }
 

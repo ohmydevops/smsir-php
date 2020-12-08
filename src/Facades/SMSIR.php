@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Amirbagh75\SMSIR\Facades;
-
 
 use Illuminate\Support\Facades\Facade;
 
