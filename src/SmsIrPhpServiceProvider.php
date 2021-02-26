@@ -11,7 +11,7 @@ class SmsIrPhpServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/Configs/config.php', 'smsirphp');
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/Configs/config.php' => config_path('smsitphp.php'),
+                __DIR__ . '/Configs/config.php' => config_path('smsirphp.php'),
             ], 'config');
         }
         $this->app->bind('smsir', function ($app) {
