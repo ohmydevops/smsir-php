@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Amirbagh75\SMSIR;
 
 use GuzzleHttp\Client;
+use Amirbagh75\SMSIR\Responses\Message;
 use Amirbagh75\SMSIR\Responses\SMSLine;
 use Psr\Http\Message\ResponseInterface;
-use Amirbagh75\SMSIR\Responses\Message;
 use GuzzleHttp\Exception\GuzzleException;
 use Amirbagh75\SMSIR\Responses\SentMessage;
 use Amirbagh75\SMSIR\Responses\SendResponse;
@@ -15,14 +15,14 @@ use Amirbagh75\SMSIR\Responses\CreditResponse;
 use Amirbagh75\SMSIR\Responses\ReceivedMessage;
 use Amirbagh75\SMSIR\Responses\SMSLinesResponse;
 use Amirbagh75\SMSIR\Responses\SentMessagesResponse;
-use Amirbagh75\SMSIR\Responses\VerificationCodeResponse;
+use Amirbagh75\SMSIR\Exceptions\InvalidTokenException;
 use Amirbagh75\SMSIR\Responses\ReceivedMessagesResponse;
+use Amirbagh75\SMSIR\Responses\VerificationCodeResponse;
 
 class SmsIRClient
 {
     private $userApiKey;
     private $secretKey;
-    private $token;
     private $lineNumber;
     private $client;
 
@@ -37,7 +37,6 @@ class SmsIRClient
     {
         $this->userApiKey = $userApiKey;
         $this->secretKey = $secretKey;
-        $this->token = "";
         $this->lineNumber = $lineNumber;
 
         $this->client = new Client([
@@ -85,7 +84,7 @@ class SmsIRClient
     /**
      * this method used in every request to get the token at first.
      *
-     * @return mixed - the Token for use api
+     * @return mixed - The Token for using in api calls
      * @return string
      * @throws GuzzleException
      */
@@ -98,7 +97,11 @@ class SmsIRClient
         $result = $this->client->post('Token', [
             'json' => $body,
         ]);
-        return json_decode($result->getBody()->getContents(), true)['TokenKey'];
+        $token = json_decode($result->getBody()->getContents(), true)['TokenKey'];
+        if (is_null($token)) {
+            throw new InvalidTokenException('Ops! Access Denied. check your API_KEY and SECRET_KEY');
+        }
+        return $token;
     }
 
     /**

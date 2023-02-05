@@ -8,5 +8,5 @@ return [
     // Your sms.ir line number
     'line-number' => env('SMSIR_LINE_NUMBER', 'Your Sms.ir Line Number'),
     //HTTP Request Timeout (seconds)
-    'request-timeout'=>10
+    'request-timeout'=> env('SMSIR_HTTP_TIMEOUT', 10),
 ];
