@@ -47,8 +47,6 @@ Then use it like the following example:
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use SMSIR;
-use Log;
 
 class Example extends Controller
 {
