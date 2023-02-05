@@ -98,7 +98,7 @@ class SmsIRClient
             'json' => $body,
         ]);
         $token = json_decode($result->getBody()->getContents(), true)['TokenKey'];
-        if(is_null($token)) {
+        if (is_null($token)) {
             throw new InvalidTokenException('Ops! Access Denied. check your API_KEY and SECRET_KEY');
         }
         return $token;
