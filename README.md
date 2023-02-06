@@ -1,7 +1,7 @@
 [![StyleCI](https://github.styleci.io/repos/305987675/shield?branch=main)](https://github.styleci.io/repos/305987675?branch=main) [![Latest Stable Version](https://poser.pugx.org/amirbagh75/smsir-php/v)](//packagist.org/packages/amirbagh75/smsir-php) [![Total Downloads](https://poser.pugx.org/amirbagh75/smsir-php/downloads)](//packagist.org/packages/amirbagh75/smsir-php) [![License](https://poser.pugx.org/amirbagh75/smsir-php/license)](//packagist.org/packages/amirbagh75/smsir-php)
 ## Unofficial PHP Package for sms.ir
 
-Inspired by the [official package](https://github.com/IPeCompany/SmsirLaravel). The official package just working in laravel! This package working in every PHP project (PHP ^7.3).
+Inspired by the [official package](https://github.com/IPeCompany/SmsirLaravel). The official package just working in laravel! This package working in every PHP project (PHP 7.3, 7.4, 8.0., 8.1 + Laravel 8, 9, 10).
 
 ### How to install:
 ```
