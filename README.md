@@ -11,7 +11,7 @@ Laravel Versions Supported: `8, 9, 10`
 composer require amirbagh75/smsir-php
 ```
 
-### Example
+### Example (Pure PHP)
 ```php
 <?php
 
@@ -36,7 +36,7 @@ try {
 ```
 
 
-### Example in laravel (use Facades)
+### Example (Laravel)
 
 First add these environment variables in your .env file:
 
