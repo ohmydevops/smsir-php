@@ -3,7 +3,7 @@
 
 Inspired by the [official package](https://github.com/IPeCompany/SmsirLaravel). The official package just working in laravel! This package working in every PHP project 
 
-PHP Versions Supported: `7.3, 7.4, 8.0., 8.1`   
+PHP Versions Supported: `7.3, 7.4, 8.0, 8.1`   
 Laravel Versions Supported: `8, 9, 10`
 
 ### How to install:
